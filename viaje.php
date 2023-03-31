@@ -62,7 +62,7 @@
         $viajeArreglado[] = $viaje;
         $this->setViajeArreglado($viajeArreglado);
     }
-    /** Esta Metodo toma una id de algun viaje ingresada por el usuario y la compara con las que estan guardadas en el arreglo en la clase le muestra un menu de opciones donde el usuario ingresa si quiere modificar algun dato del viaje como el destino y los pasajeros
+    /** Este Metodo toma un id de algun viaje ingresado por el usuario y lo compara con los que estan guardadas en el arreglo en la clase y le muestra un menu de opciones donde el usuario ingresa que dato del viaje modificar, como el destino y los pasajeros
      * @param INT $unViajeId
      */
     function modificarViaje($unViajeId) {
@@ -83,6 +83,7 @@
                         $opcionPasajero = trim(fgets(STDIN));
                         switch ($opcionPasajero) {
                             case '1':
+                                // Este case agrega un pasajero al viaje
                                 echo "Ingrese el nombre del pasajero: \n";
                                 $nombrePasajero = trim(fgets(STDIN));
                                 echo "Ingrese el apellido del pasajero: \n";
@@ -92,6 +93,7 @@
                                 $this->viajeArreglado[$key]['pasajeros'][] = ['nombre'=>$nombrePasajero, 'apellido'=> $apellidoPasajero,'dni'=>$dniPasajero];
                                 break;
                             case '2':
+                                // Este case borra un pasajero del viaje mediante su DNI
                                 echo "Ingrese el DNI del pasajero que desea quitar: \n";
                                 $dniPasajeroQuitar = trim(fgets(STDIN));
                                 $indicesEliminar = array();
@@ -101,11 +103,13 @@
                                     }  
                                 }
                                 foreach ($indicesEliminar as $indice) {
+                                    // Se borra el indice donde se encontro el dni del pasajero
                                     unset($this->viajeArreglado[$key]['pasajeros'][$indice]);
                                 }
                                 $this->viajeArreglado[$key]['pasajeros'] = array_values($this->viajeArreglado[$key]['pasajeros']);
                                 break;
                                 case '3':
+                                    // Este case modifica los datos de un pasajero con el DNI ingresado
                                     echo "Ingrese el DNI del pasajero que desea modificar: \n";
                                     $dniPasajeroMod = trim(fgets(STDIN));
                                     foreach ($this->viajeArreglado[$key]['pasajeros'] as $indice => $pasajero) {
