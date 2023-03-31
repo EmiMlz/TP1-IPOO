@@ -46,6 +46,13 @@
     public function setViajeArreglado($viajeArreglado){
         return $this->viajeArreglado = $viajeArreglado;
     }
+    /**
+     * Esta funcion carga del archivo TestViaje.php los datos de la clase, con los siguiente parametros de entrada y los settea como un arreglo en $viajeArreglado
+     * @param INT $viajeId
+     * @param STRING $destino
+     * @param INT $cantMaxPasajeros
+     * @param ARRAY $parajeros
+     */
     public function cargarViaje($viajeId, $destino, $cantMaxPasajeros, $pasajeros){
         $viaje = array ('idViaje'=>$viajeId, 'destino'=>$destino, 'cantMaxPasajeros'=>$cantMaxPasajeros, 'pasajeros'=>array());
         for ($i = 0; $i < count($pasajeros); $i++){
@@ -55,11 +62,12 @@
         $viajeArreglado[] = $viaje;
         $this->setViajeArreglado($viajeArreglado);
     }
-    function modificarViaje($miViajeId) {
-        $idExiste = false;
+    /** Esta Metodo toma una id de algun viaje ingresada por el usuario y la compara con las que estan guardadas en el arreglo en la clase le muestra un menu de opciones donde el usuario ingresa si quiere modificar algun dato del viaje como el destino y los pasajeros
+     * @param INT $unViajeId
+     */
+    function modificarViaje($unViajeId) {
         foreach ($this->viajeArreglado as $key=>$viaje) {
-            if ($viaje['idViaje'] == $miViajeId) {
-                $idExiste = true;
+            if ($viaje['idViaje'] == $unViajeId) {
                 echo "Que dato quiere modificar? 1: Para destino | 2: Para agregar,quitar un pasajero o modificar un pasajero\n";
                 $opcionMenuMod = trim(fgets(STDIN));
                 switch ($opcionMenuMod) {
@@ -117,7 +125,10 @@
                 }
             }
         }
-    }
+    } 
+    /** Metodo __toString de la clase que convierte el arreglo en un mensaje con los datos del viaje a mostrar guardado en la variable $mensaje que luego retorna
+     * 
+     */
     public function __toString(){
         $mensaje = '';
         foreach ($this->viajeArreglado as $viajeArreglado) {
